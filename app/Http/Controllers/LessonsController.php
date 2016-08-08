@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\transformer\LessonTransformer;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -12,6 +13,14 @@ use App\Lesson;
 
 class LessonsController extends Controller
 {
+    protected $lessonTransformer;
+
+    // 依赖注入
+    public function __construct(LessonTransformer $lessonTransformer)
+    {
+        $this->lessonTransformer = $lessonTransformer;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +34,7 @@ class LessonsController extends Controller
       return \Response::json([
         'status' => 'success',
         'status_code' => 200,
-        'data' => $this->transformCollection($lessons)
+        'data' => $this->lessonTransformer->transformCollection($lessons->toArray())
       ]);
     }
 
@@ -62,7 +71,7 @@ class LessonsController extends Controller
         return \Response::json([
           'status' => 'success',
           'status_code' => 200,
-          'data' => $this->transform($lesson)
+          'data' => $this->lessonTransformer->transform($lesson)
         ]);
     }
 
@@ -100,15 +109,4 @@ class LessonsController extends Controller
         //
     }
 
-    private function transformCollection($lessons) {
-      return array_map([$this, 'transform'], $lessons->toArray());
-    }
-
-    private function transform($lessons) {
-      return [
-        'title' => $lessons['title'],
-        'content' => $lessons['body'],
-        'is_free' => (boolean) $lessons['free']
-      ];
-    }
 }
