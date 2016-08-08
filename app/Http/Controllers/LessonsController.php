@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Lesson;
+
+
 class LessonsController extends Controller
 {
     /**
@@ -16,7 +19,7 @@ class LessonsController extends Controller
      */
     public function index()
     {
-        //
+        return Lesson::all();
     }
 
     /**
@@ -48,7 +51,8 @@ class LessonsController extends Controller
      */
     public function show($id)
     {
-        //
+        $lesson = Lesson::findOrFail($id);
+        return $lesson;
     }
 
     /**
