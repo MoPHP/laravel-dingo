@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 use App\Lesson;
 
+use Input;
 
 class LessonsController extends ApiController
 {
@@ -19,6 +20,8 @@ class LessonsController extends ApiController
     public function __construct(LessonTransformer $lessonTransformer)
     {
         $this->lessonTransformer = $lessonTransformer;
+        // store和update必须有身份验证
+        $this->middleware('auth.basic', ['only' => ['store', 'update']]);
     }
 
     /**
@@ -55,7 +58,17 @@ class LessonsController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        // echo json_encode($_POST);die();
+        // echo json_encode(Input::all());die();
+        if (!(input::get('title') && input::get('body'))){
+            return $this->setStatusCode(422)->responseError('validate fails');
+        }
+        // 必须先设置     protected $fillable = ['title', 'body'];
+        Lesson::create(Input::all());
+        return $this->setStatusCode(201)->response([
+            'status' => 'success',
+            'message' => 'lesson created'
+        ]);
     }
 
     /**
