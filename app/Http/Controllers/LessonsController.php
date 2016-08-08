@@ -68,7 +68,7 @@ class LessonsController extends ApiController
     {
         $lesson = Lesson::find($id);
         if (! $lesson) {
-            return $this->setStatusCode(404)->responseNotFound();
+            return $this->responseNotFound();
         }
         return $this->response([
           'status' => 'success',

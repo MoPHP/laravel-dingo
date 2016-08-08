@@ -20,9 +20,6 @@ class ApiController extends Controller
         return $this->status_code;
     }
 
-    /**
-     * @param int $status_code
-     */
     public function setStatusCode($status_code)
     {
         $this->status_code = $status_code;
@@ -32,7 +29,7 @@ class ApiController extends Controller
 
     public function responseNotFound($message = 'Not Found')
     {
-        return $this->responseError($message);
+        return $this->setStatusCode(404)->responseError($message);
     }
 
     public function responseError($message){
