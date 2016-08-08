@@ -21,7 +21,7 @@ class LessonsController extends ApiController
     {
         $this->lessonTransformer = $lessonTransformer;
         // store和update必须有身份验证
-        $this->middleware('auth.basic', ['only' => ['store', 'update']]);
+        // $this->middleware('auth.basic', ['only' => ['store', 'update']]);
     }
 
     /**
@@ -58,8 +58,8 @@ class LessonsController extends ApiController
      */
     public function store(Request $request)
     {
-        // echo json_encode($_POST);die();
-        // echo json_encode(Input::all());die();
+        // echo json_encode(file_get_contents('php://input', 'r'));die();
+        //echo json_encode($_REQUEST);die();
         if (!(input::get('title') && input::get('body'))){
             return $this->setStatusCode(422)->responseError('validate fails');
         }
