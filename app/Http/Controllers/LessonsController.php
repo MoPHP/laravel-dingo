@@ -19,7 +19,14 @@ class LessonsController extends Controller
      */
     public function index()
     {
-        return Lesson::all();
+      // 数据库表结构
+      // 没有错误信息
+      $lessons = Lesson::all();
+      return \Response::json([
+        'status' => 'success',
+        'status_code' => 200,
+        'data' => $this->transformCollection($lessons)
+      ]);
     }
 
     /**
@@ -52,7 +59,11 @@ class LessonsController extends Controller
     public function show($id)
     {
         $lesson = Lesson::findOrFail($id);
-        return $lesson;
+        return \Response::json([
+          'status' => 'success',
+          'status_code' => 200,
+          'data' => $this->transform($lesson)
+        ]);
     }
 
     /**
@@ -87,5 +98,17 @@ class LessonsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function transformCollection($lessons) {
+      return array_map([$this, 'transform'], $lessons->toArray());
+    }
+
+    private function transform($lessons) {
+      return [
+        'title' => $lessons['title'],
+        'content' => $lessons['body'],
+        'is_free' => (boolean) $lessons['free']
+      ];
     }
 }
