@@ -23,6 +23,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function ($api) {
     $api->group(['namespace' => 'App\Api\Controller'], function ($api) {
+        $api->post('user/login', 'AuthController@authenticate');
         $api->get('lessons', 'LessonsController@index');
     });
 });
