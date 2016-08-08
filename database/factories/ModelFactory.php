@@ -27,3 +27,11 @@ $factory->define(App\Lesson::class, function (Faker\Generator $faker) {
         'free' => $faker->boolean()
     ];
 });
+
+$factory->define(App\Client::class, function (Faker\Generator $faker) {
+    return [
+        'id' => str_random(38),
+        'secret' => str_random(38),
+        'name' => $faker->word
+    ];
+});

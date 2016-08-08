@@ -168,12 +168,15 @@ return [
     */
 
     'auth' => [
-        'basic' => function($app) {
+       /*
+       'basic' => function($app) {
             return new Dingo\Api\Auth\Provider\Basic($app['auth']);
         },
         'jwt' => function($app) {
             return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
-        }
+        }*/
+        // laravel 更新时候不能使用匿名函数
+        'jwt' => 'Dingo\Api\Auth\Provider\JWT'
     ],
 
     /*
