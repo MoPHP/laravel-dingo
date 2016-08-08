@@ -24,9 +24,11 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
     $api->group(['namespace' => 'App\Api\Controller'], function ($api) {
         $api->post('user/login', 'AuthController@authenticate');
+        $api->post('user/register', 'AuthController@register');
         // jwt.auth 对应 kernel 中的 jwt.auth
         $api->group(['middleware' => 'jwt.auth'], function ($api) {
             $api->get('lessons', 'LessonsController@index');
+            $api->get('lessons/{id}', 'LessonsController@show');
         });
     });
 });
