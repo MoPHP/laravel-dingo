@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
+use App\User;
+
 class AuthController extends BaseController
 {
     public function authenticate(Request $request)
@@ -35,6 +37,10 @@ class AuthController extends BaseController
     public function register(Request $request)
     {
         // 规则判断 validate
+
+        if(!($request->get('email') && $request->get('name') && $request->get('password'))) {
+            return response()->json(['error' => 'invalid_credentials'], 401);
+        }
         $newUser = [
             'email' => $request->get('email'),
             'name'  => $request->get('name'),
