@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Lesson;
 
 
-class LessonsController extends Controller
+class LessonsController extends ApiController
 {
     protected $lessonTransformer;
 
@@ -31,9 +31,8 @@ class LessonsController extends Controller
       // 数据库表结构
       // 没有错误信息
       $lessons = Lesson::all();
-      return \Response::json([
+      return $this->response([
         'status' => 'success',
-        'status_code' => 200,
         'data' => $this->lessonTransformer->transformCollection($lessons->toArray())
       ]);
     }
@@ -67,10 +66,12 @@ class LessonsController extends Controller
      */
     public function show($id)
     {
-        $lesson = Lesson::findOrFail($id);
-        return \Response::json([
+        $lesson = Lesson::find($id);
+        if (! $lesson) {
+            return $this->setStatusCode(404)->responseNotFound();
+        }
+        return $this->response([
           'status' => 'success',
-          'status_code' => 200,
           'data' => $this->lessonTransformer->transform($lesson)
         ]);
     }
