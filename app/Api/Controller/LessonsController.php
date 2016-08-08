@@ -9,7 +9,14 @@
 namespace App\Api\Controller;
 
 
-class LessonsController
-{
+use App\Lesson;
+use App\Api\Transformers\LessonTransformer;
 
+class LessonsController extends BaseController
+{
+    public function index()
+    {
+        $lessons = Lesson::all();
+        return $this->collection($lessons, new LessonTransformer());
+    }
 }

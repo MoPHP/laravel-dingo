@@ -6,7 +6,7 @@
  * Time: 20:08
  */
 
-namespace App\Api\Transformer;
+namespace App\Api\Transformers;
 
 
 use App\Lesson;

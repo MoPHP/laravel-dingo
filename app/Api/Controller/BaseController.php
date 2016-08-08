@@ -1,7 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2016/8/8
- * Time: 19:58
- */
+
+namespace App\Api\Controller;
+
+use App\Http\Controllers\Controller;
+use Dingo\Api\Routing\Helpers;
+
+class BaseController extends Controller
+{
+    use Helpers;
+}
