@@ -71,7 +71,7 @@ $api->version('v1', function ($api) {
             $api->get('lessons/{id}', 'LessonsController@show');
         });
     });*/
-    $api->group(['namespace' => 'App\Api\V1\Controller'], function ($api) {
+    $api->group(['namespace' => 'App\Api\V1\Controller', 'middleware' => 'cors'], function ($api) {
         $api->post('user/login', 'AuthController@authenticate');
         $api->post('user/register', 'AuthController@register');
         // jwt.auth 对应 kernel 中的 jwt.auth
