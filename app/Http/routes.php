@@ -19,7 +19,7 @@ Route::group(['prefix' => 'api/v1'], function () {
   Route::resource('lessons', 'LessonsController');
 });*/
 
-Route::get('oauth/authorize', ['as' => 'oauth.authorize.get', 'middleware' => ['check-authorization-params', 'auth'], function() {
+/*Route::get('oauth/authorize', ['as' => 'oauth.authorize.get', 'middleware' => ['check-authorization-params', 'auth'], function() {
     $authParams = Authorizer::getAuthCodeRequestParams();
 
     $formParams = array_except($authParams,'client');
@@ -56,16 +56,26 @@ Route::post('oauth/authorize', ['as' => 'oauth.authorize.post', 'middleware' => 
 // Add a route to respond to the access token requests
 Route::post('oauth/access_token', function() {
     return Response::json(Authorizer::issueAccessToken());
-});
+});*/
 
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function ($api) {
-    $api->group(['namespace' => 'App\Api\Controller'], function ($api) {
+/*    $api->group(['namespace' => 'App\Api\Controller'], function ($api) {
         $api->post('user/login', 'AuthController@authenticate');
         $api->post('user/register', 'AuthController@register');
         // jwt.auth 对应 kernel 中的 jwt.auth
         $api->group(['middleware' => 'jwt.auth'], function ($api) {
+            $api->get('user/me', 'AuthController@getAuthenticatedUser');
+            $api->get('lessons', 'LessonsController@index');
+            $api->get('lessons/{id}', 'LessonsController@show');
+        });
+    });*/
+    $api->group(['namespace' => 'App\Api\V1\Controller'], function ($api) {
+        $api->post('user/login', 'AuthController@authenticate');
+        $api->post('user/register', 'AuthController@register');
+        // jwt.auth 对应 kernel 中的 jwt.auth
+        $api->group(['middleware' => ['jwt.auth']], function ($api) {
             $api->get('user/me', 'AuthController@getAuthenticatedUser');
             $api->get('lessons', 'LessonsController@index');
             $api->get('lessons/{id}', 'LessonsController@show');

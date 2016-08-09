@@ -6,7 +6,7 @@
  * Time: 20:29
  */
 
-namespace App\Api\Controller;
+namespace App\Api\V1\Controller;
 
 use Illuminate\Http\Request;
 use JWTAuth;
