@@ -10,7 +10,7 @@ namespace App\Api\V1\Controller;
 
 
 use App\Lesson;
-use App\Api\Transformers\LessonTransformer;
+use App\Api\V1\Transformers\LessonTransformer;
 
 class LessonsController extends BaseController
 {
@@ -26,7 +26,6 @@ class LessonsController extends BaseController
         if (!$lesson) {
             return $this->response->errorNotFound('Lesson not found');
         }
-
         return $this->item($lesson, new LessonTransformer());
     }
 }

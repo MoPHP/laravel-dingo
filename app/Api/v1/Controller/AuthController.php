@@ -18,6 +18,8 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use App\User;
 use Dingo\Api\Facade\API;
 
+use App\transformer\UserTransformer;
+
 class AuthController extends BaseController
 {
     public function authenticate(Request $request)
@@ -40,7 +42,13 @@ class AuthController extends BaseController
         }
 
         // all good so return the token
-        return response()->json(compact('token'));
+        $user = User::where('email', '=', $credentials['email'])->first()->toArray();
+        $user = UserTransformer::transform($user);
+        $user['access_token'] = $token;
+        $user['expires_at'] = '2016-08-16T16:28:47.848+0800';
+        //获取用户信息
+        // $user = JWTAuth::parseToken()->authenticate();
+        return response()->json($user);
     }
 
     public function register(Request $request)
