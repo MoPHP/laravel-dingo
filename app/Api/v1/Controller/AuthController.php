@@ -26,7 +26,7 @@ class AuthController extends BaseController
         // $credentials = $request->only('email', 'password');
         // 可以自定义前端传递的用户键值和数据库结构不同
         $credentials = [
-            'email' => $request->get('email'),
+            'email' => $request->get('login_name'),
             'password' => $request->get('password')
         ];
         try {
