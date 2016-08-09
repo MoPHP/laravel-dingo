@@ -19,7 +19,9 @@ Route::group(['prefix' => 'api/v1'], function () {
   Route::resource('lessons', 'LessonsController');
 });*/
 
-Route::get('oauth/authorize', ['as' => 'oauth.authorize.get', 'middleware' => ['check-authorization-params', 'auth'], function() {
+// http://laraveldingo/oauth/authorize?client_id=cmpIbiMYM5OIleW53YKcHySx7QXGf9OW9zLLl1&redirect_uri=https//:www.baidu.com&response_type=code
+Auth::loginUsingId(1);
+Route::get('oauth/authorize', ['as' => 'oauth.authorize.get', 'middleware' => ['check-authorization-params'], function() {
     $authParams = Authorizer::getAuthCodeRequestParams();
 
     $formParams = array_except($authParams,'client');
@@ -34,7 +36,7 @@ Route::get('oauth/authorize', ['as' => 'oauth.authorize.get', 'middleware' => ['
 }]);
 
 
-Route::post('oauth/authorize', ['as' => 'oauth.authorize.post', 'middleware' => ['csrf', 'check-authorization-params', 'auth'], function() {
+Route::post('oauth/authorize', ['as' => 'oauth.authorize.post', 'middleware' => ['csrf', 'check-authorization-params'], function() {
 
     $params = Authorizer::getAuthCodeRequestParams();
     $params['user_id'] = Auth::user()->id;
