@@ -46,6 +46,10 @@ class AuthController extends BaseController
         $user = UserTransformer::transform($user);
         $user['access_token'] = $token;
         $user['expires_at'] = '2016-08-16T16:28:47.848+0800';
+        // $user['diff'] = 3223;
+        $user['mac_key'] = 'LSg85WJFOM';
+        // $user['server_time'] = '2016-08-09T20:57:52.626+0800';
+        $user['server_time'] = date('Y-m-d H:i:s',time());
         //获取用户信息
         // $user = JWTAuth::parseToken()->authenticate();
         return response()->json($user);
@@ -92,6 +96,6 @@ class AuthController extends BaseController
         }
 
         // the token is valid and we have found the user via the sub claim
-        return response()->json(compact('user'));
+        return response()->json(UserTransformer::transform($user));
     }
 }
