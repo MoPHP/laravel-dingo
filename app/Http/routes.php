@@ -10,6 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/', function () {
+    // return View::make('homeManage');
+    return redirect('index.html');
+    // header("location: ./webapp/index.html");
+    // include('./webapp/index.html');
+});
 
 /*Route::get('/', function () {
     return view('welcome');
