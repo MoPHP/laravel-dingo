@@ -220,16 +220,16 @@ class JWTAuth
     {
         $header = $this->request->headers->get($header);
 
-        if (! starts_with(strtolower($header), $method)) {
+/*        if (! starts_with(strtolower($header), $method)) {
             return false;
         }
 
-        return trim(str_ireplace($method, '', $header));
-       /* $mode = '/(?P<key>\w+)\="(?P<val>[^"]+)"/ui';
+        return trim(str_ireplace($method, '', $header));*/
+        $mode = '/(?P<key>\w+)\="(?P<val>[^"]+)"/ui';
         $status = preg_match_all($mode, $header, $match);
         $param = array_combine($match['key'], $match['val']);
 
-        return isset($param['id']) ? $param['id'] : '';*/
+        return isset($param['id']) ? $param['id'] : '';
     }
 
     /**
