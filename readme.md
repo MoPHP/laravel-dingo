@@ -11,6 +11,7 @@ react 源码可见
 ## 测试账号：
 account: admin@ndtest
 password: 123456
+postman中对应密码：80fba977d063a6f7262a8a9c95f61140
 
 ## 数据库
 可直接使用database/init.sql
