@@ -99,11 +99,9 @@ class AuthController extends BaseController
         return response()->json(UserTransformer::transform($user));
     }
 
-    public function deleteAuthenticatedUser (){
 
-    }
 
-    public function refreshToken(){
+    public function refreshToken($tokenToken = false){
         $token = JWTAuth::getToken();
         if(!$token){
             throw new BadRequestHtttpException('Token not provided');
@@ -113,6 +111,15 @@ class AuthController extends BaseController
         }catch(TokenInvalidException $e){
             throw new AccessDeniedHttpException('The token is invalid');
         }
+        if ($tokenToken)return $token;
+    }
+
+    public function deleteToken (){
+        $this->refreshToken();
+    }
+
+    public function getRefreshToken () {
+        $token = $this->refreshToken(true);
         return $this->response->withArray(['token'=>$token]);
     }
 }

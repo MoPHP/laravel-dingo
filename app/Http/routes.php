@@ -73,7 +73,7 @@ $api->version('v1', function ($api) {
         // jwt.auth 对应 kernel 中的 jwt.auth
         $api->group(['middleware' => ['jwt.auth']], function ($api) {
             //token
-            $api->get('token',          'AuthController@refreshToken');
+            $api->get('token',          'AuthController@getRefreshToken');
             $api->delete('token',       'AuthController@deleteToken');
 
             $api->get('user',           'AuthController@getAuthenticatedUser');
