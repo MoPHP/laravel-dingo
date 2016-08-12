@@ -98,4 +98,21 @@ class AuthController extends BaseController
         // the token is valid and we have found the user via the sub claim
         return response()->json(UserTransformer::transform($user));
     }
+
+    public function deleteAuthenticatedUser (){
+
+    }
+
+    public function refreshToken(){
+        $token = JWTAuth::getToken();
+        if(!$token){
+            throw new BadRequestHtttpException('Token not provided');
+        }
+        try{
+            $token = JWTAuth::refresh($token);
+        }catch(TokenInvalidException $e){
+            throw new AccessDeniedHttpException('The token is invalid');
+        }
+        return $this->response->withArray(['token'=>$token]);
+    }
 }
