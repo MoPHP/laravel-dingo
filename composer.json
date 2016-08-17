@@ -10,7 +10,8 @@
         "dingo/api": "1.0.*@dev",
         "tymon/jwt-auth": "0.5.*",
         "lucadegasperi/oauth2-server-laravel": "5.1.*",
-        "barryvdh/laravel-cors": "^0.8.1"
+        "barryvdh/laravel-cors": "^0.8.1",
+        "myclabs/php-enum": "^1.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

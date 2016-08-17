@@ -16,7 +16,16 @@ class LessonService extends BaseService
     public function index()
     {
         $lessons = Lesson::getBasicField()->all();
-        // return $this->collection($lessons, new LessonTransformer());
+        // 返回数据判断， true后进行数据重新组装成给用户查看的json数据
+        /*
+        {
+          count: 2,
+           items:[
+             {}.
+             {}
+           ]
+        }
+        */
         return $lessons;
     }
 
