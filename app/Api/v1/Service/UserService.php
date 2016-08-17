@@ -12,13 +12,9 @@ use App\User;
 
 class UserService extends  BaseService
 {
-    private  $userTransformer;
-
-
-
-    function getUserByEmail ($email = '1846907072@qq.com')
+    function getUserByEmail ($email)
     {
-        $user = User::where('email', '=', $email)->first();
+        $user = User::where('email', '=', $email)->GetBasicField()->first();
         return $user;
     }
 }

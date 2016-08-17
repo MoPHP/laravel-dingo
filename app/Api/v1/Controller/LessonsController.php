@@ -11,21 +11,29 @@ namespace App\Api\V1\Controller;
 
 use App\Lesson;
 use App\Api\V1\Transformers\LessonTransformer;
+use Response;
+use App\Api\V1\Service\LessonService;
+
 
 class LessonsController extends BaseController
 {
     public function index()
     {
-        $lessons = Lesson::all();
-        return $this->collection($lessons, new LessonTransformer());
+        $lessons = (new LessonService())->index();
+        if (is_null($lessons)) {
+            return response()->json(['error' => 'server error'], 500);
+        }
+        // return $this->collection($lessons, new LessonTransformer());
+        return Response::json($lessons);
     }
 
     public function show($id)
     {
-        $lesson = Lesson::find($id);
-        if (!$lesson) {
-            return $this->response->errorNotFound('Lesson not found');
+        $lesson = (new LessonService())->show($id);
+        if (is_null($lesson)) {
+            return response()->json(['error' => 'server error'], 500);
         }
-        return $this->item($lesson, new LessonTransformer());
+        // return $this->item($lessons, new LessonTransformer());
+        return Response::json($lesson);
     }
 }

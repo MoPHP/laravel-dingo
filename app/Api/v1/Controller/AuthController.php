@@ -18,21 +18,22 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use App\User;
 use Dingo\Api\Facade\API;
 
-use App\Api\V1\Transformers\UserTransformer;
 use App\Api\V1\Service\UserService;
 
 class AuthController extends BaseController
 {
-    private $userTransformer;
-    public function __construct(UserTransformer $userTransformer)
+    /*public function __construct(UserTransformer $userTransformer)
     {
         $this->userTransformer = $userTransformer;
         // store和update必须有身份验证
         // $this->middleware('auth.basic', ['only' => ['store', 'update']]);
-    }
+    }*/
 
     public function authenticate(Request $request)
     {
+        // judge
+
+
         // grab credentials from the request
         // $credentials = $request->only('email', 'password');
         // 可以自定义前端传递的用户键值和数据库结构不同
@@ -58,17 +59,16 @@ class AuthController extends BaseController
             return response()->json(['error' => 'server error'], 500);
         }
         // print_r($userModel->toArray());die();
-        // $user = $this->array($userModel->toArray());
-        $user = ((new UserTransformer())->transform($userModel));
-        $user['access_token'] = $token;
-        $user['expires_at'] = '2016-08-16T16:28:47.848+0800';
-        // $user['diff'] = 3223;
-        $user['mac_key'] = 'LSg85WJFOM';
-        // $user['server_time'] = '2016-08-09T20:57:52.626+0800';
-        $user['server_time'] = date('Y-m-d H:i:s',time());
-        //获取用户信息
-        // $user = JWTAuth::parseToken()->authenticate();
-        return response()->json($user);
+        // $user = ((new UserTransformer())->transform($userModel));
+
+        return response()->json([
+            'user_id'       => $userModel->user_id,
+            'user_name'     => $userModel->user_name,
+            'access_token'  => $token,
+            'expires_at'    => date(DATE_ISO8601, strtotime("+14 day")),
+            'mac_key'       => 'LSg85WJFOM',
+            'server_time'   => date(DATE_ISO8601)
+        ]);
     }
 
     public function register(Request $request)

@@ -52,4 +52,7 @@ class User extends Model implements AuthenticatableContract,
         return $value."s";
     }*/
 
+    public function scopeGetBasicField($query) {
+        return $query->get(['id as user_id', 'name as user_name', 'email as email']);
+    }
 }
