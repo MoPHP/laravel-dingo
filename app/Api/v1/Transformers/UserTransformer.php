@@ -22,4 +22,20 @@ class UserTransformer extends TransformerAbstract
             'user_email' => $user['email']
         ];
     }
+    /*
+         public function transform($user)
+    {
+        if($user instanceof User){
+            return [
+                'user_id' => $user['id'],
+                'user_name' => $user['name'],
+                'user_email' => $user['email']
+            ];
+        } else if (isNull($user)){
+            return null;
+        } else {
+
+        }
+    }
+     * */
 }

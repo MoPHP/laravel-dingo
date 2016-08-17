@@ -46,4 +46,10 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->user_pwd;
     }*/
+
+/*    public function getNameAttribute ($value)
+    {
+        return $value."s";
+    }*/
+
 }

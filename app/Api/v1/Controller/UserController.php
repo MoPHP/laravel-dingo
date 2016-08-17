@@ -7,8 +7,8 @@
  */
 
 namespace App\Api\V1\Controller;
-use App\User;
 
+use App\User;
 use App\Api\v1\Transformers\UserTransformer;
 
 
@@ -16,22 +16,18 @@ use App\Api\v1\Transformers\UserTransformer;
 class UserController extends BaseController
 {
 
-    protected $userTransformer;
-
     // 依赖注入
-/*    public function __construct(UserTransformer $userTransformer)
+/*
+      protected $userTransformer;
+
+      public function __construct(UserTransformer $userTransformer)
     {
         $this->userTransformer = $userTransformer;
     }*/
 
-    function getUserByEmail ($email)
-    {
-        $user = User::where('email', '=', $email)->get();
-        if (!$user) {
-            return $this->response->errorNotFound('Lesson not found');
-        }
-        // return $user->toArray();die();
-
-        return $this->item($user->toArray(), new UserTransformer());
+    public function test () {
+        $user = new User;
+        $user->test();
+        die();
     }
 }

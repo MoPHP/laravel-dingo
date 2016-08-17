@@ -18,10 +18,19 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use App\User;
 use Dingo\Api\Facade\API;
 
-use App\transformer\UserTransformer;
+use App\Api\V1\Transformers\UserTransformer;
+use App\Api\V1\Service\UserService;
 
 class AuthController extends BaseController
 {
+    private $userTransformer;
+    public function __construct(UserTransformer $userTransformer)
+    {
+        $this->userTransformer = $userTransformer;
+        // store和update必须有身份验证
+        // $this->middleware('auth.basic', ['only' => ['store', 'update']]);
+    }
+
     public function authenticate(Request $request)
     {
         // grab credentials from the request
@@ -42,8 +51,15 @@ class AuthController extends BaseController
         }
 
         // all good so return the token
-        $user = User::where('email', '=', $credentials['email'])->first()->toArray();
-        $user = UserTransformer::transform($user);
+
+        $userService = new UserService();
+        $userModel = $userService->getUserByEmail($credentials['email']);
+        if (is_null($userModel)) {
+            return response()->json(['error' => 'server error'], 500);
+        }
+        // print_r($userModel->toArray());die();
+        // $user = $this->array($userModel->toArray());
+        $user = ((new UserTransformer())->transform($userModel));
         $user['access_token'] = $token;
         $user['expires_at'] = '2016-08-16T16:28:47.848+0800';
         // $user['diff'] = 3223;
