@@ -12,9 +12,9 @@ use App\User;
 
 class UserService extends  BaseService
 {
-    function getUserByEmail ($email)
+    function getUserById ($id)
     {
-        $user = User::where('email', '=', $email)->GetBasicField()->first();
+        $user = User::find($id);
         return $user;
     }
 }

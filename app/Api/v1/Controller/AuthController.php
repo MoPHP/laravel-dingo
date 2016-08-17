@@ -8,6 +8,7 @@
 
 namespace App\Api\V1\Controller;
 
+use App\transformer\Transformer;
 use Illuminate\Http\Request;
 use JWTAuth;
 
@@ -21,7 +22,7 @@ use Dingo\Api\Facade\API;
 use App\plugin\Enum\ErrorMsg;
 
 use App\Api\V1\Service\UserService;
-
+use App\transformer\UserTransformer;
 
 class AuthController extends BaseController
 {
@@ -42,6 +43,7 @@ class AuthController extends BaseController
                 'server_time' => date(DATE_ISO8601)
             ], 400);
         }
+
         // grab credentials from the request
         // $credentials = $request->only('email', 'password');
         // 可以自定义前端传递的用户键值和数据库结构不同
@@ -68,18 +70,13 @@ class AuthController extends BaseController
         }
 
         // all good so return the token
-
-        $userService = new UserService();
-        $userModel = $userService->getUserByEmail($credentials['email']);
-        if (is_null($userModel)) {
-            return response()->json(['error' => 'server error'], 500);
-        }
+        $user = UserTransformer::transform(JWTAuth::authenticate($token)->toArray());
         // print_r($userModel->toArray());die();
         // $user = ((new UserTransformer())->transform($userModel));
 
         return response()->json([
-            'user_id'       => $userModel->user_id,
-            'user_name'     => $userModel->user_name,
+            'user_id'       => $user['user_id'],
+            'user_name'     => $user['user_name'],
             'access_token'  => $token,
             'expires_at'    => date(DATE_ISO8601, strtotime("+14 day")),
             'mac_key'       => 'LSg85WJFOM',

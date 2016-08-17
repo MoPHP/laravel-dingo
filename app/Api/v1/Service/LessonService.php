@@ -15,7 +15,7 @@ class LessonService extends BaseService
 {
     public function index()
     {
-        $lessons = Lesson::getBasicField()->all();
+        $lessons = Lesson::all();
         // 返回数据判断， true后进行数据重新组装成给用户查看的json数据
         /*
         {
@@ -31,7 +31,7 @@ class LessonService extends BaseService
 
     public function show($id)
     {
-        $lesson =  Lesson::where('id', $id)->getBasicField()->first();
+        $lesson =  Lesson::find($id);
         return $lesson;
     }
 

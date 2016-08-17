@@ -23,8 +23,8 @@ class LessonsController extends BaseController
         if (is_null($lessons)) {
             return response()->json(['error' => 'server error'], 500);
         }
-        // return $this->collection($lessons, new LessonTransformer());
-        return Response::json($lessons);
+        return $this->collection($lessons, new LessonTransformer());
+        // return Response::json($lessons);
     }
 
     public function show($id)
@@ -33,7 +33,7 @@ class LessonsController extends BaseController
         if (is_null($lesson)) {
             return response()->json(['error' => 'server error'], 500);
         }
-        // return $this->item($lessons, new LessonTransformer());
-        return Response::json($lesson);
+        return $this->item($lesson, new LessonTransformer());
+        // return Response::json($lesson);
     }
 }
