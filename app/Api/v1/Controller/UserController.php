@@ -16,7 +16,7 @@ use Input;
 
 use App\Api\V1\Service\UserService;
 
-use App\plugin\Enum\ErrorMsg;
+use App\Plugin\Enum\ErrorMsg;
 
 class UserController extends BaseController
 {

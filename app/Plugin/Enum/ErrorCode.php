@@ -6,7 +6,7 @@
  * Time: 12:59
  */
 
-namespace App\plugin\Enum;
+namespace App\Plugin\Enum;
 
 use MyCLabs\Enum\Enum;
 

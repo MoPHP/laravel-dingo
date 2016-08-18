@@ -5,8 +5,7 @@ namespace App\Api\V1\Controller;
 use App\Http\Controllers\Controller;
 use Dingo\Api\Routing\Helpers;
 
-use App\plugin\Enum\ErrorMsg;
-use App\plugin\Enum\ErrorCode;
+use App\Plugin\Enum\ErrorMsg;
 
 class BaseController extends Controller
 {
