@@ -13,25 +13,20 @@ use Illuminate\Support\Facades\DB;
 
 class LessonService extends BaseService
 {
-    public function index()
+    protected $limit = 20;
+    //  protected $fields = array('Phones.*','manufacturers.name as manufacturer');
+    protected $fields = ['id', 'title', 'body', 'free', 'created_at', 'updated_at'];
+
+    public function index($size , $page)
     {
-        $lessons = Lesson::all();
-        // 返回数据判断， true后进行数据重新组装成给用户查看的json数据
-        /*
-        {
-          count: 2,
-           items:[
-             {}.
-             {}
-           ]
-        }
-        */
+        $size = !is_null($size) ? (int)$size : $this->limit;
+        $lessons = Lesson::paginate($size, $this->fields, '', (int)$page);
         return $lessons;
     }
 
     public function show($id)
     {
-        $lesson =  Lesson::find($id);
+        $lesson =  Lesson::where('id', $id)->get($this->fields)->first();
         return $lesson;
     }
 

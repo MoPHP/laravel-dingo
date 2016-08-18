@@ -8,26 +8,35 @@
 
 namespace App\Api\V1\Controller;
 
-use App\User;
-use App\Api\v1\Transformers\UserTransformer;
+use Response;
+use Illuminate\Http\Request;
 
+use App\Api\V1\Service\UserService;
 
 
 class UserController extends BaseController
 {
-
     // 依赖注入
-/*
-      protected $userTransformer;
+    protected $userService;
 
-      public function __construct(UserTransformer $userTransformer)
+    public function __construct(UserService $userService)
     {
-        $this->userTransformer = $userTransformer;
-    }*/
+        $this->userService = $userService;
+    }
 
-    public function test () {
-        $user = new User;
-        $user->test();
-        die();
+    public function index(Request $request)
+    {
+        $lessons = $this->userService->index($request->get('size'), $request->get('page'));
+        return Response::json($lessons);
+    }
+
+    public function show($id)
+    {
+        $lesson = $this->userService->show($id);
+        if (is_null($lesson)) {
+            return response()->json(['error' => 'server error'], 500);
+        }
+        // return $this->item($lesson, new LessonTransformer());
+        return Response::json($lesson);
     }
 }

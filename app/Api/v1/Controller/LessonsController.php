@@ -9,31 +9,41 @@
 namespace App\Api\V1\Controller;
 
 
-use App\Lesson;
-use App\Api\V1\Transformers\LessonTransformer;
 use Response;
+use Illuminate\Http\Request;
+
 use App\Api\V1\Service\LessonService;
 
 
 class LessonsController extends BaseController
 {
-    public function index()
+    private $lessonService;
+    public function __construct(LessonService $lessonService)
     {
-        $lessons = (new LessonService())->index();
-        if (is_null($lessons)) {
+        $this->lessonService = $lessonService;
+    }
+
+    public function index(Request $request)
+    {
+        $lessons = $this->lessonService->index($request->get('size'), $request->get('page'));
+
+        /*
+       if (is_null($lessons)) {
             return response()->json(['error' => 'server error'], 500);
         }
-        return $this->collection($lessons, new LessonTransformer());
-        // return Response::json($lessons);
+        return $this->collection($lessons, new LessonTransformer(), ['a']);
+       */
+
+        return Response::json($lessons);
     }
 
     public function show($id)
     {
-        $lesson = (new LessonService())->show($id);
+        $lesson = $this->lessonService->show($id);
         if (is_null($lesson)) {
             return response()->json(['error' => 'server error'], 500);
         }
-        return $this->item($lesson, new LessonTransformer());
-        // return Response::json($lesson);
+        // return $this->item($lesson, new LessonTransformer());
+        return Response::json($lesson);
     }
 }
