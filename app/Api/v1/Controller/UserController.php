@@ -8,11 +8,15 @@
 
 namespace App\Api\V1\Controller;
 
+// use Illuminate\Support\Facades\Request;
 use Response;
 use Illuminate\Http\Request;
+// use Request;
+use Input;
 
 use App\Api\V1\Service\UserService;
 
+use App\plugin\Enum\ErrorMsg;
 
 class UserController extends BaseController
 {
@@ -26,6 +30,11 @@ class UserController extends BaseController
 
     public function index(Request $request)
     {
+       // print_r($request->get('size'));die();
+        print_r(ErrorMsg::REQUIRE_ARGUMENT1);die();
+        print_r($request->get('size'));
+        print_r(input::get('size'));die();
+        // \App\Http\Requests\Request::capture();
         $lessons = $this->userService->index($request->get('size'), $request->get('page'));
         return Response::json($lessons);
     }

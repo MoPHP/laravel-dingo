@@ -2,19 +2,19 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2016/8/17
- * Time: 18:00
+ * Date: 2016/8/18
+ * Time: 12:59
  */
-
 
 namespace App\plugin\Enum;
 
 use MyCLabs\Enum\Enum;
 
-class ErrorMsg extends Enum
+
+class ErrorCode extends  Enum
 {
-    // ARGUMENT
-    const REQUIRE_ARGUMENT              = '缺少参数';
+// ARGUMENT
+    const REQUIRE_ARGUMENT              = '400';
 
     const INVALID_ARGUMENT              = '无效参数(格式不对,长度过长或过短等)';
 

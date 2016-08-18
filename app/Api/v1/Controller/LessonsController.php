@@ -27,12 +27,10 @@ class LessonsController extends BaseController
     {
         $lessons = $this->lessonService->index($request->get('size'), $request->get('page'));
 
-        /*
        if (is_null($lessons)) {
             return response()->json(['error' => 'server error'], 500);
         }
         return $this->collection($lessons, new LessonTransformer(), ['a']);
-       */
 
         return Response::json($lessons);
     }

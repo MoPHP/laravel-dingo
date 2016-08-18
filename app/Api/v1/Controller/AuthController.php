@@ -20,6 +20,7 @@ use App\User;
 use Dingo\Api\Facade\API;
 
 use App\plugin\Enum\ErrorMsg;
+use App\plugin\Enum\ErrorCode;
 
 use App\Api\V1\Service\UserService;
 use App\transformer\UserTransformer;
@@ -37,11 +38,13 @@ class AuthController extends BaseController
     {
         // judge
         if (is_null($request->request) || is_null($request->get('login_name')) || is_null($request->get('password'))) {
-            return response()->json([
+           /* return response()->json([
                 'code' => 'REQUIRE_ARGUMENT',
                 'msg'  => ErrorMsg::REQUIRE_ARGUMENT,
                 'server_time' => date(DATE_ISO8601)
-            ], 400);
+            ], ErrorCode::REQUIRE_ARGUMENT);*/
+            return $this->responseError(ErrorMsg::REQUIRE_ARGUMENT, ErrorCode::REQUIRE_ARGUMENT);
+            die();
         }
 
         // grab credentials from the request

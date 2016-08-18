@@ -11,6 +11,8 @@ namespace App\Api\V1\Service;
 use App\Lesson;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\Request;
+
 class LessonService extends BaseService
 {
     protected $limit = 20;
@@ -19,6 +21,7 @@ class LessonService extends BaseService
 
     public function index($size , $page)
     {
+        // print_r(Request::)
         $size = !is_null($size) ? (int)$size : $this->limit;
         $lessons = Lesson::paginate($size, $this->fields, '', (int)$page);
         return $lessons;
@@ -27,6 +30,10 @@ class LessonService extends BaseService
     public function show($id)
     {
         $lesson =  Lesson::where('id', $id)->get($this->fields)->first();
+        if (is_null($lesson)) {
+            return null;
+        }
+        // do
         return $lesson;
     }
 
