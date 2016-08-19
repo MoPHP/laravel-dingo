@@ -17,9 +17,9 @@ class ComposerStaticInite076afe45cb086ab2da8c82077e278c9
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        'f4e9c7747917193061b46ee142399603' => __DIR__ . '/..' . '/dingo/api/src/helpers.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
-        'f4e9c7747917193061b46ee142399603' => __DIR__ . '/..' . '/dingo/api/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -59,6 +59,7 @@ class ComposerStaticInite076afe45cb086ab2da8c82077e278c9
         ),
         'M' => 
         array (
+            'MyCLabs\\Enum\\' => 13,
             'Monolog\\' => 8,
         ),
         'L' => 
@@ -197,6 +198,10 @@ class ComposerStaticInite076afe45cb086ab2da8c82077e278c9
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
+        ),
+        'MyCLabs\\Enum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/myclabs/php-enum/src',
         ),
         'Monolog\\' => 
         array (
@@ -415,6 +420,9 @@ class ComposerStaticInite076afe45cb086ab2da8c82077e278c9
         'App\\Api\\V1\\Controller\\BaseController' => __DIR__ . '/../..' . '/app/Api/v1/Controller/BaseController.php',
         'App\\Api\\V1\\Controller\\LessonsController' => __DIR__ . '/../..' . '/app/Api/v1/Controller/LessonsController.php',
         'App\\Api\\V1\\Controller\\UserController' => __DIR__ . '/../..' . '/app/Api/v1/Controller/UserController.php',
+        'App\\Api\\V1\\Service\\BaseService' => __DIR__ . '/../..' . '/app/Api/v1/Service/BaseService.php',
+        'App\\Api\\V1\\Service\\LessonService' => __DIR__ . '/../..' . '/app/Api/v1/Service/LessonService.php',
+        'App\\Api\\V1\\Service\\UserService' => __DIR__ . '/../..' . '/app/Api/v1/Service/UserService.php',
         'App\\Api\\V1\\Transformers\\LessonTransformer' => __DIR__ . '/../..' . '/app/Api/v1/Transformers/LessonTransformer.php',
         'App\\Api\\V1\\Transformers\\UserTransformer' => __DIR__ . '/../..' . '/app/Api/v1/Transformers/UserTransformer.php',
         'App\\Client' => __DIR__ . '/../..' . '/app/Client.php',
@@ -1912,6 +1920,7 @@ class ComposerStaticInite076afe45cb086ab2da8c82077e278c9
         'Monolog\\Processor\\UidProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/UidProcessor.php',
         'Monolog\\Processor\\WebProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/WebProcessor.php',
         'Monolog\\Registry' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Registry.php',
+        'MyCLabs\\Enum\\Enum' => __DIR__ . '/..' . '/myclabs/php-enum/src/Enum.php',
         'Namshi\\JOSE\\Base64\\Base64Encoder' => __DIR__ . '/..' . '/namshi/jose/src/Namshi/JOSE/Base64/Base64Encoder.php',
         'Namshi\\JOSE\\Base64\\Base64UrlSafeEncoder' => __DIR__ . '/..' . '/namshi/jose/src/Namshi/JOSE/Base64/Base64UrlSafeEncoder.php',
         'Namshi\\JOSE\\Base64\\Encoder' => __DIR__ . '/..' . '/namshi/jose/src/Namshi/JOSE/Base64/Encoder.php',

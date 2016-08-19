@@ -7,31 +7,41 @@
  */
 
 namespace App\Api\V1\Controller;
-use App\User;
 
-use App\Api\v1\Transformers\UserTransformer;
+// use Illuminate\Support\Facades\Request;
+use Response;
+use Illuminate\Http\Request;
+// use Request;
+use Input;
 
+use App\Api\V1\Service\UserService;
 
+use App\Plugin\Enum\ErrorMsg;
 
 class UserController extends BaseController
 {
-
-    protected $userTransformer;
-
     // 依赖注入
-/*    public function __construct(UserTransformer $userTransformer)
-    {
-        $this->userTransformer = $userTransformer;
-    }*/
+    protected $userService;
 
-    function getUserByEmail ($email)
+    public function __construct(UserService $userService)
     {
-        $user = User::where('email', '=', $email)->get();
-        if (!$user) {
-            return $this->response->errorNotFound('Lesson not found');
+        $this->userService = $userService;
+    }
+
+    public function getUsers(Request $request)
+    {
+       // print_r($request->get('size'));die();
+        $lessons = $this->userService->getUsers($request->get('size'), $request->get('page'));
+        return Response::json($lessons);
+    }
+
+    public function getUserById($id)
+    {
+        $lesson = $this->userService->getUserById($id);
+        if (is_null($lesson)) {
+            return response()->json(['error' => 'server error'], 500);
         }
-        // return $user->toArray();die();
-
-        return $this->item($user->toArray(), new UserTransformer());
+        // return $this->item($lesson, new LessonTransformer());
+        return Response::json($lesson);
     }
 }

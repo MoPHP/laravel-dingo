@@ -17,9 +17,12 @@ class LessonTransformer extends TransformerAbstract
     public function transform(Lesson $lesson)
     {
         return [
+            'id'    => $lesson['id'],
             'title' => $lesson['title'],
             'content' => $lesson['body'],
-            'is_free' => (boolean) $lesson['free']
+            'is_free' => (boolean) $lesson['free'],
+            'created_at' => $lesson['create_at'],
+            'update_at' => $lesson['update_at']
         ];
     }
 }

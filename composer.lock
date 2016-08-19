@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "700b1a6d78117672f82307154835b6f7",
-    "content-hash": "7b20cc75439cad1105cc7ad40e0a55a7",
+    "hash": "1979fce56b6c1d88fe7b432e10a46e21",
+    "content-hash": "9172aed8f9a5a234c5da34873750cae3",
     "packages": [
         {
             "name": "barryvdh/laravel-cors",
@@ -1246,6 +1246,50 @@
                 "schedule"
             ],
             "time": "2016-01-26 21:23:30"
+        },
+        {
+            "name": "myclabs/php-enum",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/myclabs/php-enum.git",
+                "reference": "e83e992a5b5a0858ef7adbc9239a749d71fb6979"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/myclabs/php-enum/e83e992a5b5a0858ef7adbc9239a749d71fb6979.zip",
+                "reference": "e83e992a5b5a0858ef7adbc9239a749d71fb6979",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "squizlabs/php_codesniffer": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MyCLabs\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP Enum contributors",
+                    "homepage": "https://github.com/myclabs/php-enum/graphs/contributors"
+                }
+            ],
+            "description": "PHP Enum implementation",
+            "homepage": "http://github.com/myclabs/php-enum",
+            "keywords": [
+                "enum"
+            ],
+            "time": "2016-08-01 15:48:47"
         },
         {
             "name": "namshi/jose",

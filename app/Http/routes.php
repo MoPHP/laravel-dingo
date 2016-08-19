@@ -68,14 +68,24 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function ($api) {
     $api->group(['namespace' => 'App\Api\V1\Controller', 'middleware' => 'cors'], function ($api) {
+        $api->get('user/all', 'UserController@test');
         $api->post('user/login', 'AuthController@authenticate');
         $api->post('user/register', 'AuthController@register');
         // jwt.auth 对应 kernel 中的 jwt.auth
-        $api->group(['middleware' => ['jwt.auth', 'cors']], function ($api) {
-            $api->get('user', 'AuthController@getAuthenticatedUser');
-            $api->get('user/{id}', 'AuthController@getAuthenticatedUser');
-            $api->get('lessons', 'LessonsController@index');
-            $api->get('lessons/{id}', 'LessonsController@show');
+        $api->group(['middleware' => ['jwt.auth']], function ($api) {
+
+            //token
+            $api->get('token',          'AuthController@getRefreshToken');
+            $api->delete('token',       'AuthController@deleteToken');
+
+            //user
+            // $api->get('user',           'AuthController@getAuthenticatedUser');
+            $api->get('user',           'UserController@getUsers');
+            $api->get('user/{id}',      'UserController@getUserById');
+
+            // lessons
+            $api->get('lessons',        'LessonsController@getLessons');
+            $api->get('lessons/{id}',   'LessonsController@getLessonById');
         });
     });
 });
