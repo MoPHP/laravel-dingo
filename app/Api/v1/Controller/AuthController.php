@@ -19,10 +19,7 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use App\User;
 use Dingo\Api\Facade\API;
 
-use App\plugin\Enum\ErrorMsg;
-use App\plugin\Enum\ErrorCode;
 
-use App\Api\V1\Service\UserService;
 use App\transformer\UserTransformer;
 
 class AuthController extends BaseController
@@ -43,8 +40,8 @@ class AuthController extends BaseController
                 'msg'  => ErrorMsg::REQUIRE_ARGUMENT,
                 'server_time' => date(DATE_ISO8601)
             ], ErrorCode::REQUIRE_ARGUMENT);*/
-            return $this->responseError(ErrorMsg::REQUIRE_ARGUMENT, ErrorCode::REQUIRE_ARGUMENT);
-            die();
+            // return $this->responseError(ErrorMsg::REQUIRE_ARGUMENT, ErrorCode::REQUIRE_ARGUMENT);
+            return $this->responseError('REQUIRE_ARGUMENT');
         }
 
         // grab credentials from the request
@@ -57,19 +54,11 @@ class AuthController extends BaseController
         try {
             // attempt to verify the credentials and create a token for the user
             if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json([
-                    'code' => 'LOGIN_FAILURE',
-                    'msg'  => ErrorMsg::LOGIN_FAILURE,
-                    'server_time' => date(DATE_ISO8601)
-                ], 401);
+                return $this->responseError('LOGIN_FAILURE');
             }
         } catch (JWTException $e) {
             // something went wrong whilst attempting to encode the token
-            return response()->json([
-                'code' => 'INTERNAL_SERVER_ERROR',
-                'msg'  => ErrorMsg::INTERNAL_SERVER_ERROR,
-                'server_time' => date(DATE_ISO8601)
-            ], 500);
+            return $this->responseError('INTERNAL_SERVER_ERROR');
         }
 
         // all good so return the token

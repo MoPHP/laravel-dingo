@@ -36,7 +36,7 @@ class ErrorMsg extends Enum
 
     // user
     const ACCOUNT_NOT_EXIST             = '账号不存在';
-    const LOGIN_FAILURE                 = '登录失败, 用户名或密码错误';
+    const LOGIN_FAILURE                 = '401';
     const PASSWORD_NOT_CORRECT          = '密码不正确';
 
     // token

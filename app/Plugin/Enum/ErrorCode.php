@@ -45,5 +45,5 @@ class ErrorCode extends  Enum
     const AUTH_TOKEN_EXPIRED            = '授权已过期';
 
     // server
-    const INTERNAL_SERVER_ERROR         = '服务故障';
+    const INTERNAL_SERVER_ERROR         = '500';
 }
