@@ -21,16 +21,11 @@ class UserService extends  BaseService
         return $user;
     }
 
-    public  function index ($size, $page)
+    public  function getUsers ($size, $page)
     {
         $size = !is_null($size) ? (int)$size : $this->limit;
         $users = User::paginate($size, $this->fields, '', (int)$page);
         return $users;
     }
 
-    public function show ($id)
-    {
-        $user =  User::where('id', $id)->get($this->fields)->first();
-        return $user;
-    }
 }

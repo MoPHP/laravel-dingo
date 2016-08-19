@@ -80,12 +80,12 @@ $api->version('v1', function ($api) {
 
             //user
             // $api->get('user',           'AuthController@getAuthenticatedUser');
-            $api->get('user',           'UserController@index');
-            $api->get('user/{id}',      'UserController@show');
+            $api->get('user',           'UserController@getUsers');
+            $api->get('user/{id}',      'UserController@getUserById');
 
             // lessons
-            $api->get('lessons',        'LessonsController@index');
-            $api->get('lessons/{id}',   'LessonsController@show');
+            $api->get('lessons',        'LessonsController@getLessons');
+            $api->get('lessons/{id}',   'LessonsController@getLessonById');
         });
     });
 });

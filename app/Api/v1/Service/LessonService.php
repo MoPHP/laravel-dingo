@@ -19,7 +19,7 @@ class LessonService extends BaseService
     //  protected $fields = array('Phones.*','manufacturers.name as manufacturer');
     protected $fields = ['id', 'title', 'body', 'free', 'created_at', 'updated_at'];
 
-    public function index($size , $page)
+    public function getLessons($size , $page)
     {
         // print_r(Request::)
         $size = !is_null($size) ? (int)$size : $this->limit;
@@ -27,7 +27,7 @@ class LessonService extends BaseService
         return $lessons;
     }
 
-    public function show($id)
+    public function getLessonById($id)
     {
         $lesson =  Lesson::where('id', $id)->get($this->fields)->first();
         if (is_null($lesson)) {

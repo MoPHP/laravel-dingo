@@ -23,21 +23,21 @@ class LessonsController extends BaseController
         $this->lessonService = $lessonService;
     }
 
-    public function index(Request $request)
+    public function getLessons(Request $request)
     {
-        $lessons = $this->lessonService->index($request->get('size'), $request->get('page'));
+        $lessons = $this->lessonService->getLessons($request->get('size'), $request->get('page'));
 
        if (is_null($lessons)) {
             return response()->json(['error' => 'server error'], 500);
         }
-        return $this->collection($lessons, new LessonTransformer(), ['a']);
+        // return $this->collection($lessons, new LessonTransformer(), ['a']);
 
         return Response::json($lessons);
     }
 
-    public function show($id)
+    public function getLessonById($id)
     {
-        $lesson = $this->lessonService->show($id);
+        $lesson = $this->lessonService->getLessonById($id);
         if (is_null($lesson)) {
             return response()->json(['error' => 'server error'], 500);
         }

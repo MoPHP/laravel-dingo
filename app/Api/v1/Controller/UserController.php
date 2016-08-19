@@ -28,20 +28,16 @@ class UserController extends BaseController
         $this->userService = $userService;
     }
 
-    public function index(Request $request)
+    public function getUsers(Request $request)
     {
        // print_r($request->get('size'));die();
-        print_r(ErrorMsg::REQUIRE_ARGUMENT1);die();
-        print_r($request->get('size'));
-        print_r(input::get('size'));die();
-        // \App\Http\Requests\Request::capture();
-        $lessons = $this->userService->index($request->get('size'), $request->get('page'));
+        $lessons = $this->userService->getUsers($request->get('size'), $request->get('page'));
         return Response::json($lessons);
     }
 
-    public function show($id)
+    public function getUserById($id)
     {
-        $lesson = $this->userService->show($id);
+        $lesson = $this->userService->getUserById($id);
         if (is_null($lesson)) {
             return response()->json(['error' => 'server error'], 500);
         }
