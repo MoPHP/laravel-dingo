@@ -14,12 +14,11 @@ class BaseController extends Controller
 
     public function responseError ($errorType)
     {
-        $errorMsg = ErrorMsg::$errorType();
-        $errorCode = ErrorCode::$errorType();
+        $errorMsg = explode('$$', ErrorMsg::$errorType()->getValue());
         return response()->json([
             'code' => $errorType,
-            'msg'  => $errorMsg->getValue(),
+            'msg'  => trim($errorMsg[0]),
             'server_time' => date(DATE_ISO8601)
-        ], $errorCode->getValue());
+        ], trim($errorMsg[1]));
     }
 }

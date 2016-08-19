@@ -14,7 +14,7 @@ use MyCLabs\Enum\Enum;
 class ErrorMsg extends Enum
 {
     // ARGUMENT
-    const REQUIRE_ARGUMENT              = '缺少参数';
+    const REQUIRE_ARGUMENT              = '缺少参数 $$  400';
 
     const INVALID_ARGUMENT              = '无效参数(格式不对,长度过长或过短等)';
 
@@ -36,7 +36,7 @@ class ErrorMsg extends Enum
 
     // user
     const ACCOUNT_NOT_EXIST             = '账号不存在';
-    const LOGIN_FAILURE                 = '401';
+    const LOGIN_FAILURE                 = '登录失败 $$  401';
     const PASSWORD_NOT_CORRECT          = '密码不正确';
 
     // token
@@ -45,5 +45,5 @@ class ErrorMsg extends Enum
     const AUTH_TOKEN_EXPIRED            = '授权已过期';
 
     // server
-    const INTERNAL_SERVER_ERROR         = '服务故障';
+    const INTERNAL_SERVER_ERROR         = '服务故障 $$  500';
 }
