@@ -12,7 +12,7 @@ namespace App\Api\V1\Controller;
 use Response;
 use Illuminate\Http\Request;
 
-use App\Api\V1\Service\LessonService;
+use App\Http\Controllers\LessonsController  as LessonService;
 
 
 class LessonsController extends BaseController
