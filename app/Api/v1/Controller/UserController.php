@@ -14,30 +14,30 @@ use Illuminate\Http\Request;
 // use Request;
 use Input;
 
-use App\Api\V1\Service\UserService;
+use App\Http\Controllers\UserController as UserService;
 
 use App\Plugin\Enum\ErrorMsg;
 
 class UserController extends BaseController
 {
     // 依赖注入
-    protected $userService;
+    protected $userController;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userController)
     {
-        $this->userService = $userService;
+        $this->userController = $userController;
     }
 
     public function getUsers(Request $request)
     {
        // print_r($request->get('size'));die();
-        $lessons = $this->userService->getUsers($request->get('size'), $request->get('page'));
+        $lessons = $this->userController->getUsers($request->get('size'), $request->get('page'));
         return Response::json($lessons);
     }
 
     public function getUserById($id)
     {
-        $lesson = $this->userService->getUserById($id);
+        $lesson = $this->userController->getUserById($id);
         if (is_null($lesson)) {
             return response()->json(['error' => 'server error'], 500);
         }
