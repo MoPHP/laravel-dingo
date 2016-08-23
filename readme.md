@@ -51,3 +51,8 @@ $ php artisan tinker
         return isset($param['id']) ? $param['id'] : '';
     }
 ```
+
+## 路由
+```
+php artisan route:list
+```
