@@ -86,6 +86,9 @@ $api->version('v1', function ($api) {
             // lessons
             $api->get('lessons',        'LessonsController@getLessons');
             $api->get('lessons/{id}',   'LessonsController@getLessonById');
+
+            //posts
+            $api->get('posts/{id}',     'PostController@getPostById');
         });
     });
 });
