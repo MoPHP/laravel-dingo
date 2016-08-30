@@ -55,4 +55,8 @@ class User extends Model implements AuthenticatableContract,
     public function scopeGetBasicField($query) {
         return $query->get(['id as user_id', 'name as user_name', 'email as email']);
     }
+
+    public function ownPost($post){
+        return $this->id === $post->user_id;
+    }
 }

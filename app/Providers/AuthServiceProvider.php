@@ -26,8 +26,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
+        // 判断文章 的作者是否是user 中用户
         $gate->define('show-post', function($user, $post){
-            return $user->id === $post->user_id;
+            return $user->ownPost($post);
         });
         //
     }

@@ -16,7 +16,7 @@ class PostController extends BaseController
 {
     public function getPostById($id){
         $post = Post::findOrFail($id);
-        \Auth::loginUsingId(8);
+        \Auth::loginUsingId(8); // 以uid的为8的登录
         $this->authorize('show-post', $post);
 /*        if(Gate::denies('show-post', $post)){
             abort(403, 'sorry');
