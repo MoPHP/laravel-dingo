@@ -13,10 +13,18 @@ use App\Post;
 
 class PostController extends BaseController
 {
+    public function __construct()
+    {
+        //$this->middleware('admin', ['only' => ['']]);
+        // $this->middleware('admin');
+    }
+
     public function getPostById($postId){
         $post = Post::findOrFail($postId);
         // $user = \Auth::user();
-        $this->authorize('update', $post); //
+
+        //\Auth::loginUsingId(2);
+        $this->authorize('update', $post);
         /*$user = \Auth::user();
         $user->hasRole($permission->roles);*/
         /* if(Gate::denies('show-post', $post)){

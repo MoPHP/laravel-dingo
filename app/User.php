@@ -76,4 +76,10 @@ class User extends Model implements AuthenticatableContract,
 
     // tinker: $user->roles()->attach($role), detach($role)
     // $role->permission()->save($permission)
+
+
+    public function isAdmin()
+    {
+        return $this->hasRole('admin');
+    }
 }
