@@ -19,8 +19,8 @@ class PostController extends BaseController
         // $user = \Auth::user();
         // \Auth::loginUsingId($user->id); // 以uid的为 的登录
         $this->authorize('update', $post); // 
-        $user = \Auth::user();
-        $user->hasRole($permission->roles);
+        /*$user = \Auth::user();
+        $user->hasRole($permission->roles);*/
 /*        if(Gate::denies('show-post', $post)){
             abort(403, 'sorry');
         }*/
