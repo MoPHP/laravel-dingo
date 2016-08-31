@@ -4,9 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-use Tymon\JWTAuth\Middleware\BaseMiddleware;
+use App\Api\V1\Controller\BaseController;
 
-class MustBeAdmin extends BaseMiddleware
+class MustBeAdmin
 {
     /**
      * Handle an incoming request.
@@ -23,6 +23,7 @@ class MustBeAdmin extends BaseMiddleware
         }
 
         // return redirect('/');
-        return $this->respond('tymon.jwt.absent', 'must be amdin', 400);
+        // return $this->respond('tymon.jwt.absent', 'must be admin', 400);
+        return BaseController::responseError('MUST_BE_ADMIN');
     }
 }

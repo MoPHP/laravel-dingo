@@ -12,7 +12,7 @@ class BaseController extends Controller
 {
     use Helpers;
 
-    public function responseError ($errorType)
+    static public function responseError ($errorType)
     {
         $errorMsg = explode('$$', ErrorMsg::$errorType()->getValue());
         return response()->json([
