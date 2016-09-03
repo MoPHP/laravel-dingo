@@ -15,9 +15,9 @@ class PostController extends BaseController
 {
     public function __construct()
     {
-        \Auth::loginUsingId(2);
+        //\Auth::loginUsingId(2);
         //$this->middleware('admin', ['only' => ['']]);
-        $this->middleware('admin');
+        //$this->middleware('admin');
     }
 
     public function getPostById($postId){

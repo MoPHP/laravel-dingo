@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2016 �?08 �?22 �?09:39
+-- 生成日期: 2016 �?09 �?03 �?12:11
 -- 服务器版本: 5.5.47
 -- PHP 版本: 5.5.30
 
@@ -137,7 +137,10 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2014_04_24_111403_create_oauth_auth_code_scopes_table', 3),
 ('2014_04_24_111518_create_oauth_access_tokens_table', 3),
 ('2014_04_24_111657_create_oauth_access_token_scopes_table', 3),
-('2014_04_24_111810_create_oauth_refresh_tokens_table', 3);
+('2014_04_24_111810_create_oauth_refresh_tokens_table', 3),
+('2016_08_23_193136_create_posts_table', 4),
+('2016_08_22_193136_create_posts_table', 5),
+('2016_08_30_213119_create_roles_table', 6);
 
 -- --------------------------------------------------------
 
@@ -399,6 +402,114 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `permissions`
+--
+
+CREATE TABLE IF NOT EXISTS `permissions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `label`, `created_at`, `updated_at`) VALUES
+(1, 'edit_form', 'Edit The Form', '2016-08-30 14:00:08', '2016-08-30 14:00:08');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `permission_role`
+--
+
+CREATE TABLE IF NOT EXISTS `permission_role` (
+  `permission_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`permission_id`,`role_id`),
+  KEY `permission_role_role_id_foreign` (`role_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `permission_role`
+--
+
+INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
+(1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `posts`
+--
+
+CREATE TABLE IF NOT EXISTS `posts` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `body` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `posts_user_id_foreign` (`user_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `posts`
+--
+
+INSERT INTO `posts` (`id`, `user_id`, `title`, `body`, `created_at`, `updated_at`) VALUES
+(1, 5, 'Et facere quis voluptas voluptates.', 'Provident iusto et voluptatum voluptatem enim corporis. Voluptatum sed nisi beatae sit laborum architecto aut sunt. Et sapiente maiores illo quisquam vel quasi facere asperiores.', '2016-08-23 11:42:56', '2016-08-23 11:42:56');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `roles`
+--
+
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `label`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'Admin', '2016-08-30 13:59:04', '2016-08-30 13:59:04');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `role_user`
+--
+
+CREATE TABLE IF NOT EXISTS `role_user` (
+  `user_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `role_user_role_id_foreign` (`role_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `role_user`
+--
+
+INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
+(5, 1);
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `users`
 --
 
@@ -412,7 +523,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `users`
@@ -423,7 +534,10 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `creat
 (2, 'test', '2273549343@qq.com', '$2y$10$f27V3tlo73MOzWzrLbdQm.WeacTr2MpJGy/YCnbAfiSVSzZFXmHMa', NULL, '2016-08-08 05:11:57', '2016-08-08 05:11:57'),
 (3, 'admin', 'admin@qq.com', '4a56e644153d8c73ac75fb47ac238e54', NULL, '2016-08-08 19:44:15', '2016-08-08 19:44:15'),
 (4, 'admin', 'admintest@qq.com', '$2y$10$R82uzmq.roLT6xuahQaA6.fsDImJ4Dc./KLwaQf.JP5.39b0b5BgS', NULL, '2016-08-08 20:25:19', '2016-08-08 20:25:19'),
-(5, 'admin', 'admin@ndtest', '$2y$10$pauYCXPl6jRtWqZixb82sO0UnwTOnjwXcnuKtIajE7unDbms0i47u', NULL, '2016-08-09 00:25:12', '2016-08-09 00:25:12');
+(5, 'admin', 'admin@ndtest', '$2y$10$pauYCXPl6jRtWqZixb82sO0UnwTOnjwXcnuKtIajE7unDbms0i47u', NULL, '2016-08-09 00:25:12', '2016-08-09 00:25:12'),
+(6, 'Mrs. Rosamond Weimann', 'watsica.alycia@example.com', '$2y$10$3Wzxxtb6eE4vUvaOHN0G3eTNA6zxzL2Y5xpfYOwRbctucbE.OoXU2', 'VBBaGxjD35', '2016-08-23 11:40:08', '2016-08-23 11:40:08'),
+(7, 'Jessica Wyman', 'marks.damien@example.org', '$2y$10$MAAmrCDOaupS5Bw1E..52.YfW1QkdVpuyIp1F2iVv.knK4rOQKXbm', 'wkQoLy1AMG', '2016-08-23 11:40:12', '2016-08-23 11:40:12'),
+(8, 'Macie Kuhlman', 'schinner.trace@example.net', '$2y$10$tR5TfOIn5l9mwn79Ko/9yuatQCvEGpbAGrZ0bwVjD9kwKcuU.nzi6', 'wZeuL9pjHj', '2016-08-23 11:42:56', '2016-08-23 11:42:56');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

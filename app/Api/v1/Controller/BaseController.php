@@ -12,13 +12,14 @@ class BaseController extends Controller
 {
     use Helpers;
 
-    static public function responseError ($errorType)
+    static public function responseError ($errorType, $httpCode = false)
     {
         $errorMsg = explode('$$', ErrorMsg::$errorType()->getValue());
+        $httpCode = $httpCode ? $httpCode : trim($errorMsg[1]);
         return response()->json([
             'code' => $errorType,
             'msg'  => trim($errorMsg[0]),
             'server_time' => date(DATE_ISO8601)
-        ], trim($errorMsg[1]));
+        ], $httpCode);
     }
 }
