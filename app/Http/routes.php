@@ -89,6 +89,12 @@ $api->version('v1', function ($api) {
 
             //posts
             $api->get('posts/{id}',     'PostController@getPostById');
+
+            // test RolesController
+            $api->get('roles', [
+              'middleware' => 'role:admin',
+              'uses' => 'ROLEController@createRole'
+            ]);
         });
     });
 });
