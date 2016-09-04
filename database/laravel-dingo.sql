@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2016 �?09 �?04 �?17:24
+-- 生成日期: 2016 �?09 �?04 �?21:45
 -- 服务器版本: 5.5.47
 -- PHP 版本: 5.5.30
 
@@ -161,7 +161,17 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `permissions_slug_unique` (`slug`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- 转存表中的数据 `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `slug`, `description`, `model`, `created_at`, `updated_at`) VALUES
+(1, 'Create users', 'create.users', '', NULL, '2016-09-04 12:57:33', '2016-09-04 12:57:33'),
+(2, 'Delete users', 'delete.users', NULL, NULL, '2016-09-04 12:57:33', '2016-09-04 12:57:33'),
+(3, 'Create users2', 'create.users2', '', NULL, '2016-09-04 13:08:01', '2016-09-04 13:08:01'),
+(4, 'Delete users2', 'delete.users2', NULL, NULL, '2016-09-04 13:08:01', '2016-09-04 13:08:01');
 
 -- --------------------------------------------------------
 
@@ -237,7 +247,17 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_slug_unique` (`slug`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- 转存表中的数据 `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `slug`, `description`, `level`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin', '', 1, '2016-09-04 12:48:30', '2016-09-04 12:48:30'),
+(2, 'Member', 'member', '', 2, '2016-09-04 12:55:06', '2016-09-04 12:55:06'),
+(3, 'Vip', 'vip', '', 3, '2016-09-04 12:55:06', '2016-09-04 12:55:06'),
+(4, 'Sponsor', 'sponsor', '', 4, '2016-09-04 12:55:06', '2016-09-04 12:55:06');
 
 -- --------------------------------------------------------
 
@@ -254,7 +274,14 @@ CREATE TABLE IF NOT EXISTS `role_user` (
   PRIMARY KEY (`id`),
   KEY `role_user_role_id_index` (`role_id`),
   KEY `role_user_user_id_index` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `role_user`
+--
+
+INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 5, '2016-09-04 13:15:45', '2016-09-04 13:15:45');
 
 -- --------------------------------------------------------
 

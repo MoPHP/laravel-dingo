@@ -425,7 +425,12 @@ class ComposerStaticInite076afe45cb086ab2da8c82077e278c9
     public static $classMap = array (
         'CreateLessonsTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_08_065242_create_lessons_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreatePermissionRoleTable' => __DIR__ . '/../..' . '/database/migrations/2015_01_26_115523_create_permission_role_table.php',
+        'CreatePermissionUserTable' => __DIR__ . '/../..' . '/database/migrations/2015_02_09_132439_create_permission_user_table.php',
+        'CreatePermissionsTable' => __DIR__ . '/../..' . '/database/migrations/2015_01_26_115212_create_permissions_table.php',
         'CreatePostsTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_22_193136_create_posts_table.php',
+        'CreateRoleUserTable' => __DIR__ . '/../..' . '/database/migrations/2015_01_15_114412_create_role_user_table.php',
+        'CreateRolesTable' => __DIR__ . '/../..' . '/database/migrations/2015_01_15_105324_create_roles_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
