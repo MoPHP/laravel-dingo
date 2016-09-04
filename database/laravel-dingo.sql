@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2016 �?09 �?03 �?12:11
+-- 生成日期: 2016 �?09 �?04 �?17:24
 -- 服务器版本: 5.5.47
 -- PHP 版本: 5.5.30
 
@@ -123,267 +123,13 @@ CREATE TABLE IF NOT EXISTS `migrations` (
 INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2014_10_12_000000_create_users_table', 1),
 ('2014_10_12_100000_create_password_resets_table', 1),
-('2016_08_08_065242_create_lessons_table', 2),
-('2014_04_24_110151_create_oauth_scopes_table', 3),
-('2014_04_24_110304_create_oauth_grants_table', 3),
-('2014_04_24_110403_create_oauth_grant_scopes_table', 3),
-('2014_04_24_110459_create_oauth_clients_table', 3),
-('2014_04_24_110557_create_oauth_client_endpoints_table', 3),
-('2014_04_24_110705_create_oauth_client_scopes_table', 3),
-('2014_04_24_110817_create_oauth_client_grants_table', 3),
-('2014_04_24_111002_create_oauth_sessions_table', 3),
-('2014_04_24_111109_create_oauth_session_scopes_table', 3),
-('2014_04_24_111254_create_oauth_auth_codes_table', 3),
-('2014_04_24_111403_create_oauth_auth_code_scopes_table', 3),
-('2014_04_24_111518_create_oauth_access_tokens_table', 3),
-('2014_04_24_111657_create_oauth_access_token_scopes_table', 3),
-('2014_04_24_111810_create_oauth_refresh_tokens_table', 3),
-('2016_08_23_193136_create_posts_table', 4),
-('2016_08_22_193136_create_posts_table', 5),
-('2016_08_30_213119_create_roles_table', 6);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `oauth_access_tokens`
---
-
-CREATE TABLE IF NOT EXISTS `oauth_access_tokens` (
-  `id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `session_id` int(10) unsigned NOT NULL,
-  `expire_time` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `oauth_access_tokens_id_session_id_unique` (`id`,`session_id`),
-  KEY `oauth_access_tokens_session_id_index` (`session_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `oauth_access_token_scopes`
---
-
-CREATE TABLE IF NOT EXISTS `oauth_access_token_scopes` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `access_token_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `scope_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `oauth_access_token_scopes_access_token_id_index` (`access_token_id`),
-  KEY `oauth_access_token_scopes_scope_id_index` (`scope_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `oauth_auth_codes`
---
-
-CREATE TABLE IF NOT EXISTS `oauth_auth_codes` (
-  `id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `session_id` int(10) unsigned NOT NULL,
-  `redirect_uri` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `expire_time` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `oauth_auth_codes_session_id_index` (`session_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `oauth_auth_code_scopes`
---
-
-CREATE TABLE IF NOT EXISTS `oauth_auth_code_scopes` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `auth_code_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `scope_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `oauth_auth_code_scopes_auth_code_id_index` (`auth_code_id`),
-  KEY `oauth_auth_code_scopes_scope_id_index` (`scope_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `oauth_clients`
---
-
-CREATE TABLE IF NOT EXISTS `oauth_clients` (
-  `id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `secret` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `oauth_clients_id_secret_unique` (`id`,`secret`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- 转存表中的数据 `oauth_clients`
---
-
-INSERT INTO `oauth_clients` (`id`, `secret`, `name`, `created_at`, `updated_at`) VALUES
-('cmpIbiMYM5OIleW53YKcHySx7QXGf9OW9zLLl1', 'nRXAyiqW8teueLNuob4DyRQmyJka2rfTzEyje7', 'aut', '2016-08-08 06:08:53', '2016-08-08 06:08:53');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `oauth_client_endpoints`
---
-
-CREATE TABLE IF NOT EXISTS `oauth_client_endpoints` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `client_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `redirect_uri` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `oauth_client_endpoints_client_id_redirect_uri_unique` (`client_id`,`redirect_uri`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
-
---
--- 转存表中的数据 `oauth_client_endpoints`
---
-
-INSERT INTO `oauth_client_endpoints` (`id`, `client_id`, `redirect_uri`, `created_at`, `updated_at`) VALUES
-(1, 'cmpIbiMYM5OIleW53YKcHySx7QXGf9OW9zLLl1', 'https//:www.baidu.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `oauth_client_grants`
---
-
-CREATE TABLE IF NOT EXISTS `oauth_client_grants` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `client_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `grant_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `oauth_client_grants_client_id_index` (`client_id`),
-  KEY `oauth_client_grants_grant_id_index` (`grant_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `oauth_client_scopes`
---
-
-CREATE TABLE IF NOT EXISTS `oauth_client_scopes` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `client_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `scope_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `oauth_client_scopes_client_id_index` (`client_id`),
-  KEY `oauth_client_scopes_scope_id_index` (`scope_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `oauth_grants`
---
-
-CREATE TABLE IF NOT EXISTS `oauth_grants` (
-  `id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `oauth_grant_scopes`
---
-
-CREATE TABLE IF NOT EXISTS `oauth_grant_scopes` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `grant_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `scope_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `oauth_grant_scopes_grant_id_index` (`grant_id`),
-  KEY `oauth_grant_scopes_scope_id_index` (`scope_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `oauth_refresh_tokens`
---
-
-CREATE TABLE IF NOT EXISTS `oauth_refresh_tokens` (
-  `id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `access_token_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `expire_time` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`access_token_id`),
-  UNIQUE KEY `oauth_refresh_tokens_id_unique` (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `oauth_scopes`
---
-
-CREATE TABLE IF NOT EXISTS `oauth_scopes` (
-  `id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `oauth_sessions`
---
-
-CREATE TABLE IF NOT EXISTS `oauth_sessions` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `client_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `owner_type` enum('client','user') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'user',
-  `owner_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `client_redirect_uri` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `oauth_sessions_client_id_owner_type_owner_id_index` (`client_id`,`owner_type`,`owner_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `oauth_session_scopes`
---
-
-CREATE TABLE IF NOT EXISTS `oauth_session_scopes` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `session_id` int(10) unsigned NOT NULL,
-  `scope_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `oauth_session_scopes_session_id_index` (`session_id`),
-  KEY `oauth_session_scopes_scope_id_index` (`scope_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+('2016_08_08_065242_create_lessons_table', 1),
+('2016_08_22_193136_create_posts_table', 1),
+('2015_01_15_105324_create_roles_table', 2),
+('2015_01_15_114412_create_role_user_table', 2),
+('2015_01_26_115212_create_permissions_table', 2),
+('2015_01_26_115523_create_permission_role_table', 2),
+('2015_02_09_132439_create_permission_user_table', 2);
 
 -- --------------------------------------------------------
 
@@ -408,18 +154,14 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 CREATE TABLE IF NOT EXISTS `permissions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `model` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
-
---
--- 转存表中的数据 `permissions`
---
-
-INSERT INTO `permissions` (`id`, `name`, `label`, `created_at`, `updated_at`) VALUES
-(1, 'edit_form', 'Edit The Form', '2016-08-30 14:00:08', '2016-08-30 14:00:08');
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `permissions_slug_unique` (`slug`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -428,18 +170,32 @@ INSERT INTO `permissions` (`id`, `name`, `label`, `created_at`, `updated_at`) VA
 --
 
 CREATE TABLE IF NOT EXISTS `permission_role` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `permission_id` int(10) unsigned NOT NULL,
   `role_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`permission_id`,`role_id`),
-  KEY `permission_role_role_id_foreign` (`role_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `permission_role_permission_id_index` (`permission_id`),
+  KEY `permission_role_role_id_index` (`role_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- 转存表中的数据 `permission_role`
+-- 表的结构 `permission_user`
 --
 
-INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
-(1, 1);
+CREATE TABLE IF NOT EXISTS `permission_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `permission_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `permission_user_permission_id_index` (`permission_id`),
+  KEY `permission_user_user_id_index` (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -474,18 +230,14 @@ INSERT INTO `posts` (`id`, `user_id`, `title`, `body`, `created_at`, `updated_at
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `level` int(11) NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
-
---
--- 转存表中的数据 `roles`
---
-
-INSERT INTO `roles` (`id`, `name`, `label`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'Admin', '2016-08-30 13:59:04', '2016-08-30 13:59:04');
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `roles_slug_unique` (`slug`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -494,18 +246,15 @@ INSERT INTO `roles` (`id`, `name`, `label`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `role_user` (
-  `user_id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `role_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`user_id`,`role_id`),
-  KEY `role_user_role_id_foreign` (`role_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- 转存表中的数据 `role_user`
---
-
-INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
-(5, 1);
+  `user_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `role_user_role_id_index` (`role_id`),
+  KEY `role_user_user_id_index` (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
