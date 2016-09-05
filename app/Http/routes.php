@@ -93,7 +93,7 @@ $api->version('v1', function ($api) {
             // test RolesController
             $api->get('roles', [
               'middleware' => 'role:admin',
-              'uses' => 'ROLEController@createRole'
+              'uses' => 'RoleController@createRole'
             ]);
         });
     });
