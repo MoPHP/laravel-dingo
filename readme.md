@@ -54,6 +54,7 @@ $ php artisan tinker
     }
 ```
 
+
 ## 路由
 ```
 php artisan route:list
