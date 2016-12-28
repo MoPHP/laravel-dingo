@@ -6,6 +6,16 @@
 react 源码可见
 [react](https://github.com/mocept/teto.js)
 
+
+# 服务器配置
+在 Nginx，在你的网站配置中增加下面的配置，可以使用「优雅链接」：
+```
+location / {
+    try_files $uri $uri/ /index.php?$query_string;
+}
+
+```
+
 # 开始
 - key
 终端使用如下命令：
@@ -51,7 +61,7 @@ $ php artisan tinker
 
         return isset($param['id']) ? $param['id'] : '';
     }
-    
+
 ```
 
 ## 路由
