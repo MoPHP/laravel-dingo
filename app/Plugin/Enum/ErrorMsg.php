@@ -39,6 +39,9 @@ class ErrorMsg extends Enum
     const LOGIN_FAILURE                 = '登录失败 $$  401';
     const PASSWORD_NOT_CORRECT          = '密码不正确';
 
+    // role
+    const MUST_BE_ADMIN                 = '必须是管理员才能访问 $$  401';
+
     // token
     const UNAUTHORIZED                  = '未授权';
     const AUTH_INVALID_TOKEN            = '无效的授权';

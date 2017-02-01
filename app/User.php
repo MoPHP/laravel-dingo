@@ -10,12 +10,18 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+use Bican\Roles\Traits\HasRoleAndPermission;
+use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
+
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
-                                    CanResetPasswordContract
+                                    CanResetPasswordContract,
+                                    HasRoleAndPermissionContract
 {
-    use Authenticatable, Authorizable, CanResetPassword;
-
+    use Authenticatable, Authorizable, CanResetPassword, HasRoleAndPermission
+    {
+      HasRoleAndPermission ::can insteadof Authorizable;
+    }
     /**
      * The database table used by the model.
      *
@@ -55,4 +61,34 @@ class User extends Model implements AuthenticatableContract,
     public function scopeGetBasicField($query) {
         return $query->get(['id as user_id', 'name as user_name', 'email as email']);
     }
+
+    public function ownPost($post){
+        return $this->id === $post->user_id;
+    }
+
+    /*
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function hasRole($role)
+    {
+        // hasRole('admin')
+        if(is_string($role)) {
+            return $this->roles->contains('name', $role);
+        }
+        return !!$role->intersect($this->roles)->count();
+    }
+
+    // tinker: $user->roles()->attach($role), detach($role)
+    // $role->permission()->save($permission)
+
+
+    public function isAdmin()
+    {
+        return $this->hasRole('admin');
+    }
+
+    */
 }

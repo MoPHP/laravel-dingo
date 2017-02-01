@@ -86,6 +86,15 @@ $api->version('v1', function ($api) {
             // lessons
             $api->get('lessons',        'LessonsController@getLessons');
             $api->get('lessons/{id}',   'LessonsController@getLessonById');
+
+            //posts
+            $api->get('posts/{id}',     'PostController@getPostById');
+
+            // test RolesController
+            $api->get('roles', [
+              'middleware' => 'role:admin',
+              'uses' => 'RoleController@createRole'
+            ]);
         });
     });
 });

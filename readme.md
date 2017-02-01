@@ -22,6 +22,7 @@ location / {
 ```
 php artisan key:generate
 ```
+
 将生成的key复制到config/app.php替换APP_KEY键值
 
 # 相关数据
@@ -63,6 +64,7 @@ $ php artisan tinker
     }
 
 ```
+
 
 ## 路由
 ```

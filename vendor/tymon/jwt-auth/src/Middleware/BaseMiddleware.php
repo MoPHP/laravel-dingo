@@ -59,6 +59,10 @@ abstract class BaseMiddleware
     {
         $response = $this->events->fire($event, $payload, true);
 
-        return $response ?: $this->response->json(['error' => $error], $status);
+        return $response ?: $this->response->json([
+          'code' => $event,
+          'msg' => $error,
+          'server_time' => date(DATE_ISO8601)
+        ], $status);
     }
 }
